@@ -26,6 +26,30 @@ class FileHandler(FileSystemEventHandler):
         })
 
 
+    def on_moved(self, event):
+        if event.is_directory:
+            return 
+        elif event.src_path.endswith(".tmp"):
+            return
+        
+        file_path = clean_url(event.src_path)
+        shell_output({
+            "title": "file moved",
+            "msg": file_path,
+        })
+
+
+    def on_deleted(self, event):
+        if event.is_directory:
+            return 
+        elif event.src_path.endswith(".tmp"):
+            return
+        
+        file_path = clean_url(event.src_path)
+        shell_output({
+            "title": "file deleted",
+            "msg": file_path,
+        })
 
 
 
