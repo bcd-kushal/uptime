@@ -1,12 +1,12 @@
 from datetime import datetime
 
 def current_time():
-    TIME_FORMAT = "%d-%m-%Y | %H:%M:%S:%f"
+    TIME_FORMAT = "%d %b, %H:%M"
 
     present_time = datetime.now()
     formatted_time = present_time.strftime(TIME_FORMAT)
 
-    return formatted_time[:-3]
+    return formatted_time
 
 
 
@@ -24,4 +24,11 @@ class Color:
 
 def shell_output(data):
     if data["title"] == "file added":
-        print(f'{Color.YELLOW}[{current_time()}]{Color.END} {Color.GREEN}{data["title"]}{Color.END} :/> {data["msg"]}')
+        print(f'{Color.YELLOW}[{current_time()}]{Color.END} {Color.GREEN}{data["title"]}:{Color.END} {data["msg"]}')
+    
+    if data["title"] == "file moved":
+        print(f'{Color.YELLOW}[{current_time()}]{Color.END} {Color.BLUE}{data["title"]}:{Color.END} {data["msg"]}')
+    
+    if data["title"] == "file deleted":
+        print(f'{Color.YELLOW}[{current_time()}]{Color.END} {Color.RED}{data["title"]}:{Color.END} {data["msg"]}')
+    
